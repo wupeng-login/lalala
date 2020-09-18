@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="vue.js"></script>
+		<style>
+			/*v-enter [这是个时间节点]是进入之前，元素的起始状态，此时还没有开始进入*/
+			/*v-leave-to [这是个时间节点]是动画离开之后，离开的终止状态，此时，元素动画已经结束了*/
+			.v-enter,
+			.v-leave-to{
+				opacity: 0;
+				transform: translateX(180px);
+			}
+			
+			/*v-enter-active [入场动画的时间段]*/
+			/*v-leave-active [离场动画的时间段]*/
+			.v-enter-active,
+			.v-leave-active{
+				transition: all 0.4s ease;
+			}
+
+			.wp-enter,
+			.wp-leave-to{
+				opacity: 0;
+				transform: translateX(180px);
+			}
+			.wp-enter-active,
+			.wp-leave-active{
+				transition: all,0.4s ease;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='app'>
+			<input type="button" value="togger" @click="flag=!flag"/>
+			<p v-if='false'>transition元素是vue官方提供的</p>
+			<transition>
+				<h3 v-if="flag">吴朋</h3>			
+			</transition>
+			
+			<transition name='wp'>
+				<h3 v-if='flag'>王梦岩</h3>
+			</transition>
+			
+		</div>
+		<script>
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					flag:false
+				},
+				methods:{
+					
+				}
+
+			})
+		</script>
+	</body>
+</html>
+
+

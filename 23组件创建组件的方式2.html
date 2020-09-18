@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!--还是使用，标签的形式引入组件-->
+			<mycom2></mycom2>
+			<aaaa></aaaa>
+		</div>
+		
+		<template id="temp">
+			<div>
+				<h1>啦啦啦</h1>
+			</div>
+		</template>
+		<script>
+			Vue.component('mycom2',{
+				//注意：不论是那种方式创建出来的组件，组件的template属性指向的模板内容，必须有切只有唯一的一个元素
+				template:'<div><h3>这是直接使用Vue.component创建出来的组件</h3><pan>吴朋</span></div>'
+			})
+			Vue.component('aaaa', {
+				template:"#temp"
+			})
+			var vm = new Vue({
+				el:'#app',
+				data:{
+					
+				},
+				methods:{
+					
+				}
+			})
+		</script>
+	</body>
+</html>

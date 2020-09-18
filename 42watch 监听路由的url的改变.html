@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="vue-router-3.1.2.js"></script>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/login?id=10">登录</router-link>
+        <router-link to="/register">注册</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+        var login = {
+            template:"<h1>登录</h1>"
+        }
+        var register = {
+            template:"<h1>注册</h1>"
+        }
+
+        const router = new VueRouter({
+            routes:[
+                {path:'/',redirect:'/login'},
+                {path:'/login',component:login},
+                {path:'/register',component:register}
+            ]
+        })
+        var vm = new Vue({
+            el:"#app",
+            data:{},
+           
+            methods: {
+                
+            },
+            router,
+            watch: {
+                '$route.path':function(newVal,oldVal){
+                    // console.log(newVal +'----'+ oldVal)
+                    if(newVal =='/login'){
+                        console.log('欢迎进入登录界面')
+                    }else if(newVal =='/register'){
+                        console.log('欢迎进入注册界面')
+                    }
+                }
+            },
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="vue.js"></script>
+	</head>
+	<body>
+		
+		<div id='name'>
+			<p v-cloak>{{msg}}</p>
+			<p v-text="msg2">11</p>
+			<p v-html="msg3"></p>
+			<input type="button" value="按钮" v-bind:title="mytitle"/>
+			<input type="button" value="按钮" v-bind:title="mytitle" @click="show"/>
+			
+		</div>
+		<script>
+			var vm = new Vue({
+				el:"#name",
+				data:{
+					msg:'I LOVE YOU',
+					msg2:'吴朋',
+					msg3:'<h1>我是h1</h1>',
+					mytitle:'这是我自定义的title'
+				},
+				methods:{
+					show(){
+						alert('Hello')
+					}
+				}
+			})
+			
+		</script>
+	</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="vue.js"></script>
+	<style>
+		.active {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<ul>
+			<li v-for='(move,index) in movies' :key="index" :class="{active: currentIndex===index}" @click='dianji(index)' >{{index}}--{{move}}</li>
+		</ul>
+	</div>
+	<script>
+		let vm = new Vue({
+			el:'#app',
+			data:{
+				movies:['英雄联盟','地下城与勇士','穿越火线','王者荣耀'],
+				currentIndex:0
+			},
+			methods:{
+				dianji(index){
+					this.currentIndex = index
+				}
+			}
+		})
+	</script>
+</body>
+</html> -->
+
+
+
+

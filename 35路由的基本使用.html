@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="vue.js"></script>
+	<!--1.安装vue-router模块-->
+	<script src="vue-router-3.1.2.js"></script>
+	<style>
+		/* .router-link-active 是默认选中的类 是有vue-router提供的 */
+		.router-link-active,
+		.myactive {
+			color: red;
+			font-size: 40px;
+			font-weight: 700;
+			font-style: italic;
+		}
+		.v-enter,
+		.v-leave-to{
+			opacity: 0;
+			transform: translateX(180px)
+		}
+		.v-enter-active,
+		.v-leave-active{
+			transition: all 1s ease;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app">
+		<!-- <a href="#/login">登录</a>
+			<a href="#/register">注册</a> -->
+		<!-- router-link 默认渲染为一个a标签 -->
+		<router-link to="/login">登录</router-link>
+		<router-link to="/register">注册</router-link>
+
+
+		<!--这是vue-router提供的元素，专门用来当作占位符的，将来路由规则，匹配到的组件，就会展示到这个router-view中去-->
+		<!--所以我们可以把vue-router认为是一个占位符-->
+		<transition mode='out-in'>
+			<router-view></router-view>
+		</transition>
+	</div>
+	<script>
+		//login是组件的模板对象
+		var login = {
+			template: "<h1>登录组件</h1>"
+		}
+		var register = {
+			template: "<h1>注册组件</h1>"
+
+		}
+		//2.创建提个路由对象 ，当导入vue-router包之后，在window全局对象中，就有了一个路由的构造函数，叫做VueRouter
+		var routerObj = new VueRouter({
+			//				route   //route 表示路由匹配规则
+			routes: [//路由匹配规则
+				//每个路由规则，都是一个对象，这个规则对象，有两个属性
+				//属性1是path，表示监听  那个路由链接地址
+				//属性2是component 表示，如果路由是前面匹配到的path，则展示，component属性对应的那个组件
+				//注意：component的属性值，必须是一个组件的模板对象，不能是组件的引用名称
+				{ path: '/', redirect: '/login' }, //默认是登录组件
+				{ path: '/login', component: login },
+				{ path: '/register', component: register },
+			],
+
+			// 修改默认的类  默认为.router-link-active
+			linkActiveClass: 'myactive'
+
+		})
+		var vm = new Vue({
+			el: '#app',
+			data: {
+
+			},
+			methods: {
+
+			},
+
+			router: routerObj  //将路由规则对象  注册到vm实例对象上，用来监听URL地址的变化，然后展示对应的组件
+
+		})
+	</script>
+</body>
+
+</html>

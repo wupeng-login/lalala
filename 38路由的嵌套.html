@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="vue.js"></script>
+    <script src="vue-router-3.1.2.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to='/account'>account</router-link>
+        <router-view></router-view>
+    </div>
+    <template id='tmpl'>
+        <div>
+            <h1>这是account组件</h1>
+            <router-link to="/account/login?id=11&name=wp">登录</router-link>
+            <router-link to="/account/register/10/wmy">注册</router-link>
+            <router-view></router-view>
+        </div>
+    </template>
+    <script>
+        var account = {
+            template: "#tmpl"
+        }
+        var login = {
+            template: "<h1>登录组件</h1>",
+            created() {
+                console.log(this.$route.query.id) 
+            },
+        }
+        var register = {
+            template: "<h1>注册组件</h1>",
+            created() {
+                console.log(this.$route.params.name)
+            },
+        }
+
+        var router = new VueRouter({
+            routes: [{
+                    path: '/account',
+                    component: account,
+                    // 使用children属性，实现子路由，同时，子路由的path前面 不要 加  /，否则以根路径开始请求，这样不方便用户理解url地址
+                    children: [{
+                        path: 'login',
+                        component: login
+                    }, {
+                        path: 'register/:id/:name',
+                        component: register
+                    }]
+                },
+                // {
+                //     path: '/account/login',
+                //     component: login
+                // }, {
+                //     path: '/account/register',
+                //     component: register
+                // }, 
+            ]
+
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+
+            },
+            router
+        })
+    </script>
+</body>
+
+</html>
